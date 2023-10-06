@@ -16,15 +16,24 @@ const tasks = [
 function creatTask(task) { 
  
   const liTask = document.createElement("li");
-  const divTask = document.createElement("div");
-  const spanTask = document.createElement("span");
-  const paragraphTask = document.createElement("p");
-  const buttonTask = document.createElement("button");   
-  
   liTask.classList.add("task__item");
+
+  const divTask = document.createElement("div");
   divTask.classList.add("task-info__container");
+  
+  const spanTask = document.createElement("span");
   spanTask.classList.add("task-type");
+  
+  const paragraphTask = document.createElement("p");
+  
+  const buttonTask = document.createElement("button");   
   buttonTask.classList.add("task__button--remove-task");
+  buttonTask.addEventListener("click",function(event){
+    const index=tasks.indexOf(task);
+    tasks.splice(index,1);
+    renderTask(tasks);
+  });
+  
   paragraphTask.innerText=task.title;
   
   if(task.type==="Urgente"){
@@ -71,6 +80,9 @@ function newTask(){
   });
 }
 
+function removeTask(){
+
+}
 
 renderTask(tasks);
  newTask();
