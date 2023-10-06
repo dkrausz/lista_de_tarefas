@@ -13,10 +13,8 @@ const tasks = [
 
 
 
-function creatTask(task) {
-  console.log(task);
+function creatTask(task) { 
  
-
   const liTask = document.createElement("li");
   const divTask = document.createElement("div");
   const spanTask = document.createElement("span");
@@ -45,7 +43,7 @@ function creatTask(task) {
 return liTask;
 }
 
-function addTasks(taskList) {
+function renderTask(taskList) {
   const ulTask = document.querySelector(".tasks__list");
   ulTask.innerHTML = "";
   for (let i = 0; i < taskList.length; i++) {
@@ -56,5 +54,23 @@ function addTasks(taskList) {
 
 }
 
-addTasks(tasks);
+function newTask(){
+  const formNewTask = document.querySelector(".form__container");
+  formNewTask.addEventListener("submit",function(event){
+    event.preventDefault();
+    const taskName=document.querySelector("#input_title");
+    const taskPriority=document.querySelector(".form__input--priority");
+    console.log(taskName.value);
+    console.log(taskPriority.value);
+    
+    const task = { title: taskName.value,
+      type: taskPriority.value
+     };
+     tasks.push(task);
+     renderTask(tasks);
+  });
+}
 
+
+renderTask(tasks);
+ newTask();
