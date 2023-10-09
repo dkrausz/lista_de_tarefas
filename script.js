@@ -13,7 +13,7 @@ const tasks = [
 
 
 
-function creatTask(task) { 
+function createTaskItem(task) { 
  
   const liTask = document.createElement("li");
   liTask.classList.add("task__item");
@@ -31,7 +31,7 @@ function creatTask(task) {
   buttonTask.addEventListener("click",function(event){
     const index=tasks.indexOf(task);
     tasks.splice(index,1);
-    renderTask(tasks);
+    renderElements(tasks);
   });
   
   paragraphTask.innerText=task.title;
@@ -43,21 +43,22 @@ function creatTask(task) {
     spanTask.classList.add("span-important");
   }
   else if(task.type==="Normal"){
-  spanTask.classList.add("span-normal");
-  
+  spanTask.classList.add("span-normal");  
   }
 
-  liTask.append(divTask, buttonTask);
   divTask.append(spanTask, paragraphTask);
+  liTask.append(divTask, buttonTask);
+
 return liTask;
 }
 
-function renderTask(taskList) {
+
+function renderElements(taskList) {
   const ulTask = document.querySelector(".tasks__list");
   ulTask.innerHTML = "";
   for (let i = 0; i < taskList.length; i++) {
    const currentTask=taskList[i];
-   const currentTaskCreated=creatTask(currentTask);
+   const currentTaskCreated=createTaskItem(currentTask);
     ulTask.append(currentTaskCreated);
   }
 
@@ -76,7 +77,7 @@ function newTask(){
       type: taskPriority.value
      };
      tasks.push(task);
-     renderTask(tasks);
+     renderElements(tasks);
   });
 }
 
@@ -84,5 +85,5 @@ function removeTask(){
 
 }
 
-renderTask(tasks);
+renderElements(tasks);
  newTask();
