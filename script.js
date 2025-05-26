@@ -11,79 +11,70 @@ const tasks = [
   { title: "Assistir a um documentário interessante", type: "Normal" },
 ];
 
-
-
-function createTaskItem(task) { 
- 
+function createTaskItem(task) {
   const liTask = document.createElement("li");
   liTask.classList.add("task__item");
 
   const divTask = document.createElement("div");
   divTask.classList.add("task-info__container");
-  
+
   const spanTask = document.createElement("span");
   spanTask.classList.add("task-type");
-  
+
   const paragraphTask = document.createElement("p");
-  
-  const buttonTask = document.createElement("button");   
+
+  const buttonTask = document.createElement("button");
   buttonTask.classList.add("task__button--remove-task");
-  buttonTask.addEventListener("click",function(event){
-    const index=tasks.indexOf(task);
-    tasks.splice(index,1);
+  buttonTask.addEventListener("click", function (event) {
+    const index = tasks.indexOf(task);
+    tasks.splice(index, 1);
     renderElements(tasks);
   });
-  
-  paragraphTask.innerText=task.title;
-  
-  if(task.type==="Urgente"){
-    spanTask.classList.add("span-urgent");    
-  }
-  else if(task.type==="Importante"){
+
+  paragraphTask.innerText = task.title;
+
+  if (task.type === "Urgente") {
+    spanTask.classList.add("span-urgent");
+  } else if (task.type === "Importante") {
     spanTask.classList.add("span-important");
-  }
-  else if(task.type==="Normal"){
-  spanTask.classList.add("span-normal");  
+  } else if (task.type === "Normal") {
+    spanTask.classList.add("span-normal");
   }
 
   divTask.append(spanTask, paragraphTask);
   liTask.append(divTask, buttonTask);
 
-return liTask;
+  return liTask;
 }
-
 
 function renderElements(taskList) {
   const ulTask = document.querySelector(".tasks__list");
   ulTask.innerHTML = "";
   for (let i = 0; i < taskList.length; i++) {
-   const currentTask=taskList[i];
-   const currentTaskCreated=createTaskItem(currentTask);
+    const currentTask = taskList[i];
+    const currentTaskCreated = createTaskItem(currentTask);
     ulTask.append(currentTaskCreated);
   }
-
 }
 
-function newTask(){
+function newTask() {
   const formNewTask = document.querySelector(".form__container");
-  formNewTask.addEventListener("submit",function(event){
+  formNewTask.addEventListener("submit", function (event) {
     event.preventDefault();
-    const taskName=document.querySelector("#input_title");
-    const taskPriority=document.querySelector(".form__input--priority");
+    const taskName = document.querySelector("#input_title");
+    const taskPriority = document.querySelector(".form__input--priority");
     console.log(taskName.value);
     console.log(taskPriority.value);
-    
-    const task = { title: taskName.value,
-      type: taskPriority.value
-     };
-     tasks.push(task);
-     renderElements(tasks);
+
+    const task = { title: taskName.value, type: taskPriority.value };
+    tasks.push(task);
+    renderElements(tasks);
+    taskName.value = "";
+    taskPriority.value = "";
   });
 }
 
-function removeTask(){
-
-}
+function removeTask() {}
 
 renderElements(tasks);
- newTask();
+newTask();
