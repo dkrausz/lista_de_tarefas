@@ -34,7 +34,7 @@ A aplicação é uma lista de tarefas interativa que permite adicionar, concluir
 2. Abra a pasta do projeto:
 
    ```bash
-    cd open-music
+    cd lista_de_tarefas
    ```
 
 3. Abra o arquivo index.html no navegador:
